@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Baki Hanma - Web Oficial</title>
+    
+    <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === ESTILOS GENERALES Y FONDO === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-image: url('img/fondo-baki.png'); 
+            background-size: cover; 
+            background-position: center center; 
+            background-attachment: fixed; 
+            background-color: #050505; 
+            font-family: 'Arial Black', Impact, sans-serif; 
+            color: white; 
+            overflow-x: hidden; 
+        }
+        
+        .contenedor-central { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { padding-top: 30px; }
+
+        /* === 1. BARRA DE NAVEGACIÓN CENTRADA === */
+        .barra-roja { 
+            background-color: #e31b23; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 45px; 
+            border-top: 2px solid #84d2bd; 
+            border-bottom: 2px solid white; 
+            position: relative; 
+            z-index: 100; 
+        }
+        
+        .caja-logo { position: absolute; left: 10px; top: -25px; width: 100px; height: 80px; display: flex; align-items: center; justify-content: center; }
+        .caja-logo img { max-width: 90%; height: auto; border: 0; }
+        
+        nav ul { list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; }
+        nav ul li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 20px; 
+            text-transform: uppercase; 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 500;
+        }
+        nav ul li a::before { content: "• "; }
+        
+        .caja-iconos { position: absolute; right: 20px; display: flex; gap: 15px; }
+        .caja-iconos img { width: 25px; height: 25px; cursor: pointer; border: 0; }
+
+        /* === 2. SECCIÓN HERO === */
+        .hero { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; height: 250px; }
+        .hero-izq { width: 45%; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+        .hero-izq img { max-width: 100%; height: auto; display: block; border: 0; } 
+        
+        .caja-boton { 
+            background-color: #f8f8f8; 
+            color: black; 
+            font-size: 20px; 
+            text-align: center; 
+            padding: 10px 0; 
+            border-radius: 25px; 
+            width: 80%; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 700;
+        }
+        .caja-boton:hover { background-color: #e31b23; color: white; }
+        
+        /* SLIDER */
+        .hero-der { width: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+        .contenedor-cinta { width: 100%; overflow: hidden; border: 2px solid #222; }
+        .cinta-imagenes { display: flex; width: 100%; }
+        .cinta-imagenes img { width: 100%; flex-shrink: 0; display: block; border: 0; } 
+        
+        .flecha-slider { position: absolute; top: 50%; background-color: white; border: none; width: 30px; height: 30px; cursor: pointer; clip-path: polygon(100% 50%, 0 0, 0 100%); z-index: 10; }
+        .flecha-izq { left: -15px; transform: translateY(-50%) rotate(180deg); }
+        .flecha-der { right: -15px; transform: translateY(-50%); }
+
+        /* === 3. BANNER CENTRAL === */
+        .banner-central { margin-top: 60px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 2px solid white; border-bottom: 2px solid white; padding: 20px 0; }
+        .banner-perfil { width: 30%; display: flex; align-items: center; justify-content: center; }
+        .banner-perfil img { width: 100%; height: auto; border: 0; } 
+        .banner-pregunta { width: 35%; display: flex; align-items: center; justify-content: center; }
+        .banner-pregunta img { width: 100%; height: auto; border: 0; } 
+
+        /* === 4. SECCIÓN INFERIOR === */
+        .seccion-inferior { display: flex; margin-top: 60px; gap: 40px; margin-bottom: 60px; }
+        .col-personajes { width: 55%; }
+        .titulo-seccion, .titulo-peleas { 
+            background-color: #e31b23; color: white; text-align: center; padding: 5px; margin-bottom: 20px; border-radius: 5px; text-transform: uppercase; font-family: 'Oswald', sans-serif; font-weight: 700;
+        }
+        .grid-personajes { display: flex; justify-content: space-between; gap: 20px; }
+        .tarjeta-personaje { width: 31%; height: 200px; border: 2px solid white; display: flex; flex-direction: column; background-color: #000; }
+        .nombre-personaje { background-color: #e31b23; text-align: center; padding: 3px; font-size: 13px; text-transform: uppercase; font-family: 'Oswald', sans-serif; }
+        .foto-personaje { flex-grow: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .foto-personaje img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+        .col-peleas { width: 45%; }
+        .titulo-peleas { border-radius: 20px; }
+        .grid-peleas { display: flex; justify-content: space-between; gap: 10px; }
+        .tarjeta-pelea { width: 32%; height: 120px; border: 2px solid white; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #000; }
+        .tarjeta-pelea img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* === PILARES === */
+        .pilar-izq { position: fixed; top: 0; left: 0; height: 100vh; width: 200px; background-image: url('img/pilar-izq.png'); background-size: cover; z-index: -1; }
+        .pilar-der { position: fixed; top: 0; right: 0; height: 100vh; width: 200px; background-image: url('img/pilar-der.png'); background-size: cover; z-index: -1; }
+    </style>
+</head>
+
+<body>
+    <div class="pilar-izq"></div>
+    <div class="pilar-der"></div>
+
+    <header>
+        <div class="contenedor-central">
+            <div class="barra-roja">
+                <div class="caja-logo"><img src="img/logo.png" alt="Logo"></div> 
+                <nav>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Personajes</a></li>
+                        <li><a href="#">Historia</a></li>
+                        <li><a href="#">Mercancía</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </nav>
+                <div class="caja-iconos">
+                    <img src="img/icono-carrito.png" alt="Perfil">
+                    <img src="img/icono-perfil.png" alt="Carrito">
+                </div>
+            </div>
+
+            <div class="hero">
+                <div class="hero-izq">
+                    <img src="img/Baki ojos.png" alt="Baki Hanma">
+                    <div class="caja-boton">DESCUBRE MÁS</div>
+                </div>
+                <div class="hero-der">
+                    <button class="flecha-slider flecha-izq" onclick="cambiarImagen(-1)"></button>
+                    <div class="contenedor-cinta">
+                        <div class="cinta-imagenes" id="cinta">
+                            <img src="img/slider-1.png" alt="S1">
+                            <img src="img/slider-2.png" alt="S2" onerror="this.style.display='none'">
+                            <img src="img/slider-3.png" alt="S3" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                    <button class="flecha-slider flecha-der" onclick="cambiarImagen(1)"></button>
+                </div>
+            </div>
+
+            <div class="banner-central">
+                <div class="banner-perfil"><img src="img/banner-yujiro.png" alt="Yujiro"></div>
+                <div class="banner-pregunta"><img src="img/texto-fuerte.png" alt="Pregunta"></div>
+                <div class="banner-perfil"><img src="img/banner-baki.png" alt="Baki"></div>
+            </div>
+
+            <div class="seccion-inferior">
+                <div class="col-personajes">
+                    <div class="titulo-seccion">• PERSONAJES PRINCIPALES •</div>
+                    <div class="grid-personajes">
+                        <div class="tarjeta-personaje">
+                            <div class="nombre-personaje">BAKI HANMA</div>
+                            <div class="foto-personaje"><img src="img/personaje-1.png" alt="Baki"></div>
+                        </div>
+                        <div class="tarjeta-personaje">
+                            <div class="nombre-personaje">YUJIRO HANMA</div>
+                            <div class="foto-personaje"><img src="img/personaje-2.png" alt="Yujiro"></div>
+                        </div>
+                        <div class="tarjeta-personaje">
+                            <div class="nombre-personaje">BISCUIT OLIVA</div>
+                            <div class="foto-personaje"><img src="img/personaje-3.png" alt="Oliva"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-peleas">
+                    <div class="titulo-peleas">• PELEAS MÁS MEMORABLES •</div>
+                    <div class="grid-peleas">
+                        <div class="tarjeta-pelea"><img src="img/pelea-1.png" alt="P1"></div>
+                        <div class="tarjeta-pelea"><img src="img/pelea-2.png" alt="P2"></div>
+                        <div class="tarjeta-pelea"><img src="img/pelea-3.png" alt="P3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <audio id="musica-baki" loop>
+        <source src="audio/baki-ost.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 1. Lógica del Slider
+        const cinta = document.getElementById("cinta");
+        let enTransicion = false; 
+
+        function cambiarImagen(direccion) {
+            if (enTransicion) return; 
+            const imagenes = Array.from(cinta.children).filter(img => img.style.display !== 'none');
+            if (imagenes.length <= 1) return; 
+
+            enTransicion = true;
+            if (direccion === 1) { 
+                cinta.style.transition = "transform 0.5s ease-in-out";
+                cinta.style.transform = "translateX(-100%)"; 
+                setTimeout(() => {
+                    cinta.style.transition = "none"; 
+                    cinta.appendChild(imagenes[0]); 
+                    cinta.style.transform = "translateX(0)"; 
+                    enTransicion = false; 
+                }, 500); 
+            } else { 
+                cinta.style.transition = "none"; 
+                cinta.insertBefore(imagenes[imagenes.length - 1], imagenes[0]); 
+                cinta.style.transform = "translateX(-100%)"; 
+                setTimeout(() => {
+                    cinta.style.transition = "transform 0.5s ease-in-out";
+                    cinta.style.transform = "translateX(0)"; 
+                    enTransicion = false; 
+                }, 10);
+            }
+        }
+
+        // 2. Lógica del Audio (Suena al primer clic)
+        document.body.addEventListener('click', function() {
+            const audio = document.getElementById("musica-baki");
+            audio.play().catch(error => console.log("Error al reproducir:", error));
+        }, { once: true });
+    </script>
+</body>
+</html>
